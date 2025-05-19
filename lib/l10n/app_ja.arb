@@ -1,0 +1,12 @@
+{
+    "appName": "Ongi",
+    "appLanguage": "言語",
+    "systemLanguage": "システム設定",
+    "privacyPolicy": "プライバシーポリシー",
+    "termsOfService": "利用規約",
+    "appInfo": "アプリ情報",
+    "whenGeneral": "落ち着きが必要なとき",
+    "whenAnger": "怒りを感じるとき",
+    "whenSad": "悲しいとき",
+    "whenAfraid": "恐れを感じるとき"
+}

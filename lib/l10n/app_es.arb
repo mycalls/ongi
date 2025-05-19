@@ -1,0 +1,12 @@
+{
+    "appName": "Ongi",
+    "appLanguage": "Idioma",
+    "systemLanguage": "Configuración del sistema",
+    "privacyPolicy": "Política de privacidad",
+    "termsOfService": "Términos de servicio",
+    "appInfo": "Información de la aplicación",
+    "whenGeneral": "Cuando necesites calma",
+    "whenAnger": "Cuando estés enojado",
+    "whenSad": "Cuando estés triste",
+    "whenAfraid": "Cuando tengas miedo"
+}

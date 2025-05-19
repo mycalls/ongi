@@ -1,0 +1,12 @@
+{
+    "appName": "온기",
+    "appLanguage": "언어",
+    "systemLanguage": "시스템 기본값",
+    "privacyPolicy": "개인정보 보호정책",
+    "termsOfService": "서비스 이용 약관",
+    "appInfo": "앱 정보",
+    "whenGeneral": "평온한 마음이 필요할 때",
+    "whenAnger": "화가 날 때",
+    "whenSad": "슬플 때",
+    "whenAfraid": "두려울 때"
+}

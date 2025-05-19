@@ -44,9 +44,13 @@ dependencies:
   flutter_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
 
+  go_router: ^15.1.2
   shared_preferences: ^2.5.3
+  
   flutter_native_splash: ^2.4.6
   wakelock_plus: ^1.3.2
+  web: ^1.1.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +81,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # localization
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   assets:

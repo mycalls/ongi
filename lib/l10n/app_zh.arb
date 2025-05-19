@@ -1,0 +1,12 @@
+{
+    "appName": "Ongi",
+    "appLanguage": "语言",
+    "systemLanguage": "系统设置",
+    "privacyPolicy": "隐私政策",
+    "termsOfService": "服务条款",
+    "appInfo": "应用信息",
+    "whenGeneral": "需要平静时",
+    "whenAnger": "生气时",
+    "whenSad": "伤心时",
+    "whenAfraid": "害怕时"
+}
