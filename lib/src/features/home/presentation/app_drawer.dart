@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ongi_app/src/core/constants/app_colors.dart';
-import 'package:ongi_app/src/core/constants/dividers.dart';
-import 'package:ongi_app/src/core/constants/emotion_category.dart';
-import 'package:ongi_app/src/core/extensions/app_loacalizations_context.dart';
-import 'package:ongi_app/src/features/home/presentation/app_locale_button.dart';
-import 'package:ongi_app/src/features/home/providers/main_category_provider.dart';
-import 'package:ongi_app/src/routing/app_router.dart';
+import 'package:ongi/src/core/constants/app_colors.dart';
+import 'package:ongi/src/core/constants/app_constants.dart';
+import 'package:ongi/src/core/constants/dividers.dart';
+import 'package:ongi/src/core/constants/emotion_category.dart';
+import 'package:ongi/src/core/extensions/app_loacalizations_context.dart';
+import 'package:ongi/src/features/home/presentation/app_locale_button.dart';
+import 'package:ongi/src/features/home/presentation/app_phrase_timer_interval_button.dart';
+import 'package:ongi/src/features/home/providers/main_category_provider.dart';
+import 'package:ongi/src/routing/app_router.dart';
 
 class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});
@@ -54,64 +56,72 @@ class AppDrawer extends ConsumerWidget {
     final selectedCategory = ref.watch(mainCategoryProvider);
 
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          const SizedBox(height: 16),
-          /*
-            DrawerHeader(
-              decoration: BoxDecoration(color: AppBasicColors.colors[0]),
-              child: const Text(
-                '감정 선택하기',
-                style: TextStyle(color: Colors.white, fontSize: 24),
-              ),
+      child: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.symmetric(vertical: 16),
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.favorite_outline, color: appMainColor),
+              title: Text(context.loc.appName),
             ),
-            */
-          ...EmotionCategory.values.map((e) {
-            return ListTile(
-              leading: Icon(
-                Icons.label_outline,
-                color: AppBasicColors.colors[e.index % 10],
+            Dividers.divider16,
+            /*
+              DrawerHeader(
+                decoration: BoxDecoration(color: AppBasicColors.colors[0]),
+                child: const Text(
+                  '감정 선택하기',
+                  style: TextStyle(color: Colors.white, fontSize: 24),
+                ),
               ),
-              title: Text(_getCategoryDisplayName(context, e)),
-              onTap: () => _onCategorySelected(context, ref, e),
-              selected: selectedCategory == e,
-              selectedTileColor: Theme.of(context).colorScheme.primaryContainer,
-            );
-          }),
-          Dividers.divider16,
-          const AppLocaleButton(),
-          Dividers.divider16,
-          // terms button
-          ListTile(
-            leading: const Icon(Icons.handshake_outlined),
-            title: Text(context.loc.termsOfService),
-            onTap: () {
-              if (context.canPop()) {
-                context.pop();
-              }
-              context.push(ScreenPaths.appTerms);
-            },
-          ),
-          // privacy button
-          ListTile(
-            leading: const Icon(Icons.privacy_tip_outlined),
-            title: Text(context.loc.privacyPolicy),
-            onTap: () {
-              _pop(context);
-              context.push(ScreenPaths.appPrivacy);
-            },
-          ),
-          // app info button
-          ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: Text(context.loc.appInfo),
-            onTap: () {
-              _pop(context);
-              context.push(ScreenPaths.appInfo);
-            },
-          ),
-        ],
+              */
+            ...EmotionCategory.values.map((e) {
+              return ListTile(
+                leading: Icon(
+                  Icons.label_outline,
+                  color: AppBasicColors.colors[e.index % 10],
+                ),
+                title: Text(_getCategoryDisplayName(context, e)),
+                onTap: () => _onCategorySelected(context, ref, e),
+                selected: selectedCategory == e,
+                selectedTileColor:
+                    Theme.of(context).colorScheme.primaryContainer,
+              );
+            }),
+            Dividers.divider16,
+            const AppLocaleButton(),
+            const AppPhraseTimerIntervalButton(),
+            Dividers.divider16,
+            // terms button
+            ListTile(
+              leading: const Icon(Icons.handshake_outlined),
+              title: Text(context.loc.termsOfService),
+              onTap: () {
+                if (context.canPop()) {
+                  context.pop();
+                }
+                context.push(ScreenPaths.appTerms);
+              },
+            ),
+            // privacy button
+            ListTile(
+              leading: const Icon(Icons.privacy_tip_outlined),
+              title: Text(context.loc.privacyPolicy),
+              onTap: () {
+                _pop(context);
+                context.push(ScreenPaths.appPrivacy);
+              },
+            ),
+            // app info button
+            ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: Text(context.loc.appInfo),
+              onTap: () {
+                _pop(context);
+                context.push(ScreenPaths.appInfo);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

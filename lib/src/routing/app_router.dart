@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ongi_app/src/core/config/app_settings_controller.dart';
-import 'package:ongi_app/src/features/home/presentation/main_screen.dart';
-import 'package:ongi_app/src/features/infomation/app_information_screen.dart';
-import 'package:ongi_app/src/features/infomation/app_privacy_screen.dart';
-import 'package:ongi_app/src/features/infomation/app_terms_screen.dart';
+import 'package:ongi/src/core/config/app_settings_controller.dart';
+import 'package:ongi/src/features/home/presentation/main_screen.dart';
+import 'package:ongi/src/features/infomation/app_information_screen.dart';
+import 'package:ongi/src/features/infomation/app_privacy_screen.dart';
+import 'package:ongi/src/features/infomation/app_terms_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

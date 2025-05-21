@@ -18,6 +18,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get systemLanguage => '시스템 기본값';
 
   @override
+  String get phraseChangeInterval => '표시 주기';
+
+  @override
+  String get defaultValue => '기본값';
+
+  @override
+  String get seconds => '초';
+
+  @override
   String get privacyPolicy => '개인정보 보호정책';
 
   @override

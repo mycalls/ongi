@@ -1,4 +1,4 @@
-package com.example.ongi_app
+package com.jongsukoh.ongi
 
 import io.flutter.embedding.android.FlutterActivity
 

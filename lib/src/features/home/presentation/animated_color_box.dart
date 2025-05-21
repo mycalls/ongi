@@ -3,7 +3,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:ongi_app/src/core/constants/app_colors.dart';
+import 'package:ongi/src/core/constants/app_colors.dart';
 
 class AnimatedColorBox extends StatefulWidget {
   const AnimatedColorBox({

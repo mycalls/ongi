@@ -2,10 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ongi_app/src/core/config/app_settings_controller.dart';
-import 'package:ongi_app/src/features/home/presentation/app_drawer.dart';
-import 'package:ongi_app/src/features/home/presentation/phrase_body.dart';
-import 'package:ongi_app/src/features/home/providers/main_category_provider.dart';
+import 'package:ongi/src/core/config/app_settings_controller.dart';
+import 'package:ongi/src/core/constants/app_constants.dart';
+import 'package:ongi/src/features/home/presentation/app_drawer.dart';
+import 'package:ongi/src/features/home/presentation/phrase_body.dart';
+import 'package:ongi/src/features/home/providers/main_category_provider.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -25,6 +26,9 @@ class MainScreen extends ConsumerWidget {
           final selectedCategory = ref.watch(mainCategoryProvider);
           final appSettings = ref.watch(appSettingsControllerProvider);
           return PhraseBody(
+            phraseTimerInterval:
+                appSettings.appPhraseTimerInterval ??
+                defaultAppPhraseTimerInterval,
             selectedCategory: selectedCategory,
             languageCode:
                 appSettings.appLocale?.languageCode ??

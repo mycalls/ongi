@@ -1,16 +1,23 @@
-# ongi_app
+# Ongi
 
-A new Flutter project.
+English | [한글](README.ko.md)
 
-## Getting Started
+**Ongi** is a simple, open-source mobile app designed to help users pause and regulate their emotions during difficult moments. It displays calming and supportive phrases at customizable intervals.
 
-This project is a starting point for a Flutter application.
+## Features
+- Displays encouraging phrases to help you feel grounded
+- Categories for different emotional states (calm, angry, sad, afraid)
+- Customizable display interval
+- Clean, distraction-free interface
+- No ads, no sign-up
+- Free and open-source
 
-A few resources to get you started if this is your first Flutter project:
+## Purpose
+Ongi is not a productivity app or therapy tool — it’s just a quiet companion for emotional regulation.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Modify & Share
+You are free to **use, modify, and distribute** it as you wish, including adapting it for your own emotional needs or language.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## License
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+

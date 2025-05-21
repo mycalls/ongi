@@ -1,8 +1,8 @@
 // lib/services/korean_phrase_service.dart
 import 'dart:math';
 
-import 'package:ongi_app/src/core/constants/emotion_category.dart';
-import 'package:ongi_app/src/features/home/services/phrase_service.dart';
+import 'package:ongi/src/core/constants/emotion_category.dart';
+import 'package:ongi/src/features/home/services/phrase_service.dart';
 
 class KoreanPhraseService implements PhraseService {
   final Random _random = Random();

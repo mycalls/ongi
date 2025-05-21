@@ -1,5 +1,5 @@
 // lib/src/features/home/providers/main_category_provider.dart
-import 'package:ongi_app/src/core/constants/emotion_category.dart';
+import 'package:ongi/src/core/constants/emotion_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'main_category_provider.g.dart';

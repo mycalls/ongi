@@ -18,6 +18,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get systemLanguage => '系统设置';
 
   @override
+  String get phraseChangeInterval => '间隔';
+
+  @override
+  String get defaultValue => '默认';
+
+  @override
+  String get seconds => '秒';
+
+  @override
   String get privacyPolicy => '隐私政策';
 
   @override

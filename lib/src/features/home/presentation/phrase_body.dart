@@ -8,14 +8,14 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:ongi_app/src/core/constants/emotion_category.dart';
-import 'package:ongi_app/src/features/home/presentation/animated_color_box.dart';
-import 'package:ongi_app/src/features/home/services/english_phrase_service.dart';
-import 'package:ongi_app/src/features/home/services/japanese_phrase_service.dart';
-import 'package:ongi_app/src/features/home/services/korean_phrase_service.dart';
-import 'package:ongi_app/src/features/home/services/phrase_service.dart';
-import 'package:ongi_app/src/features/home/services/simplified_chinese_phrase_service.dart';
-import 'package:ongi_app/src/features/home/services/spanish_phrase_service.dart';
+import 'package:ongi/src/core/constants/emotion_category.dart';
+import 'package:ongi/src/features/home/presentation/animated_color_box.dart';
+import 'package:ongi/src/features/home/services/english_phrase_service.dart';
+import 'package:ongi/src/features/home/services/japanese_phrase_service.dart';
+import 'package:ongi/src/features/home/services/korean_phrase_service.dart';
+import 'package:ongi/src/features/home/services/phrase_service.dart';
+import 'package:ongi/src/features/home/services/simplified_chinese_phrase_service.dart';
+import 'package:ongi/src/features/home/services/spanish_phrase_service.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 // 시간 경과에 따라 다양한 문구를 애니메이션으로 표시하고 화면 켜짐을 관리하는 상태 저장 위젯입니다.
@@ -23,9 +23,12 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 class PhraseBody extends StatefulWidget {
   const PhraseBody({
     super.key,
+    required this.phraseTimerInterval,
     required this.languageCode,
     this.selectedCategory = EmotionCategory.general,
   });
+
+  final int phraseTimerInterval;
 
   // 표시될 문구의 언어 코드입니다 (예: 'ko', 'en').
   // The language code for the phrases to be displayed (e.g., 'ko', 'en').
@@ -74,7 +77,7 @@ class _PhraseBodyState extends State<PhraseBody>
   static const Duration _animationDuration = Duration(milliseconds: 1500);
   // 문구 변경 간격입니다. (사라짐(1.5s) + 나타남(1.5s) + 대기(12s))
   // Interval for changing phrases. (Fade out (1.5s) + Fade in (1.5s) + Wait (12s))
-  static const Duration _phraseTimerInterval = Duration(seconds: 15);
+  // static const Duration _phraseTimerInterval = Duration(seconds: 15);
   // Wakelock 관련 상수입니다.
   // Constants related to wakelock.
   // 화면 켜짐 유지 시간입니다.
@@ -124,7 +127,7 @@ class _PhraseBodyState extends State<PhraseBody>
     WakelockPlus.enable();
     // 디버깅 로그: Wakelock 활성화됨 (initState)
     // Debug log: Wakelock enabled (initState)
-    debugPrint('Wakelock enabled (initState)');
+    dev.log('Wakelock enabled (initState)');
   }
 
   // 앱 생명주기 상태가 변경될 때 호출됩니다.
@@ -134,7 +137,7 @@ class _PhraseBodyState extends State<PhraseBody>
     super.didChangeAppLifecycleState(state);
     // 디버깅 로그: 앱 생명주기 상태 변경됨: $state
     // Debug log: AppLifecycleState changed: $state
-    debugPrint('AppLifecycleState changed: $state');
+    dev.log('AppLifecycleState changed: $state');
 
     if (state == AppLifecycleState.resumed) {
       // 앱이 다시 활성화될 때 (예: 백그라운드에서 포그라운드로 돌아올 때).
@@ -185,6 +188,9 @@ class _PhraseBodyState extends State<PhraseBody>
       // Here, `_updateContent` is called immediately to reflect the phrase for the new category.
       _updateContent(category: widget.selectedCategory);
     }
+    if (oldWidget.phraseTimerInterval != widget.phraseTimerInterval) {
+      _startPhraseTimer();
+    }
   }
 
   // 주어진 `languageCode`에 따라 적절한 `PhraseService` 구현을 반환합니다.
@@ -231,7 +237,8 @@ class _PhraseBodyState extends State<PhraseBody>
     } else {
       // 선택된 카테고리에 대한 문구가 없는 경우를 대비한 기본 문구입니다. (이론상 발생하기 어려움)
       // Fallback phrase in case there are no phrases for the selected category (theoretically unlikely).
-      _nextPhrase = "오늘도 좋은 하루 보내세요."; // 기본 문구 Default phrase
+      _nextPhrase =
+          "Don't worry, everything will be alright."; // 기본 문구 Default phrase
     }
   }
 
@@ -272,15 +279,20 @@ class _PhraseBodyState extends State<PhraseBody>
     // 이전에 실행 중이던 문구 타이머가 있다면 취소합니다.
     // Cancel any existing phrase timer before starting a new one.
     _phraseTimer?.cancel();
-    _phraseTimer = Timer.periodic(_phraseTimerInterval, (timer) {
-      // 디버깅 로그: 문구 타이머 이벤트 발생 - 내용 업데이트
-      // Debug log: Phrase timer ticked - updating content
-      dev.log('Phrase timer ticked - updating content');
-      _updateContent();
-    });
+    _phraseTimer = Timer.periodic(
+      Duration(seconds: widget.phraseTimerInterval),
+      (timer) {
+        // 디버깅 로그: 문구 타이머 이벤트 발생 - 내용 업데이트
+        // Debug log: Phrase timer ticked - updating content
+        dev.log('Phrase timer ticked - updating content');
+        _updateContent();
+      },
+    );
     // 디버깅 로그: 문구 타이머 시작됨, 간격: $_phraseTimerInterval
     // Debug log: Phrase timer started with interval: $_phraseTimerInterval
-    dev.log('Phrase timer started with interval: $_phraseTimerInterval');
+    dev.log(
+      'Phrase timer started with interval: ${widget.phraseTimerInterval}',
+    );
   }
 
   // 화면 켜짐 유지를 위한 타이머를 시작하거나 재시작합니다.
@@ -362,10 +374,7 @@ class _PhraseBodyState extends State<PhraseBody>
           child: Center(
             child: Opacity(
               opacity: contentOpacity,
-              child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: PhraseText(currentPhrase: _currentPhrase),
-              ),
+              child: PhraseText(currentPhrase: _currentPhrase),
             ),
           ),
         );
@@ -441,13 +450,15 @@ class PhraseText extends StatelessWidget {
       ],
     );
     */
-    return Padding(
-      padding: const EdgeInsets.all(24),
-      child: Text(
-        currentPhrase,
-        textAlign: TextAlign.center,
-        style:
-            phraseTextStyle, // 동적으로 생성된 스타일 사용 Use dynamically generated style
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Text(
+          currentPhrase,
+          textAlign: TextAlign.center,
+          style:
+              phraseTextStyle, // 동적으로 생성된 스타일 사용 Use dynamically generated style
+        ),
       ),
     );
   }

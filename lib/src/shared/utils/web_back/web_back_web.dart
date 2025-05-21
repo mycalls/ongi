@@ -1,6 +1,6 @@
 import 'package:web/web.dart';
 
-import 'package:ongi_app/src/shared/utils/web_back/web_back_stub.dart';
+import 'package:ongi/src/shared/utils/web_back/web_back_stub.dart';
 
 WebBackStub getInstance() => WebBackWeb();
 

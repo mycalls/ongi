@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ongi_app/l10n/app_localizations.dart';
-import 'package:ongi_app/src/core/config/app_settings_controller.dart';
-import 'package:ongi_app/src/core/extensions/app_loacalizations_context.dart';
+import 'package:ongi/l10n/app_localizations.dart';
+import 'package:ongi/src/core/config/app_settings_controller.dart';
+import 'package:ongi/src/core/extensions/app_loacalizations_context.dart';
 
 class AppLocaleButton extends ConsumerWidget {
   const AppLocaleButton({super.key});

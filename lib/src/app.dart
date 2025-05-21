@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ongi_app/l10n/app_localizations.dart';
-import 'package:ongi_app/src/core/config/app_settings_controller.dart';
-import 'package:ongi_app/src/core/theme/app_theme_data.dart';
-import 'package:ongi_app/src/routing/app_router.dart';
+import 'package:ongi/l10n/app_localizations.dart';
+import 'package:ongi/src/core/config/app_settings_controller.dart';
+import 'package:ongi/src/core/theme/app_theme_data.dart';
+import 'package:ongi/src/routing/app_router.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});

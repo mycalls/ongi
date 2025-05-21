@@ -18,6 +18,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get systemLanguage => 'システム設定';
 
   @override
+  String get phraseChangeInterval => '間隔';
+
+  @override
+  String get defaultValue => 'デフォルト';
+
+  @override
+  String get seconds => '秒';
+
+  @override
   String get privacyPolicy => 'プライバシーポリシー';
 
   @override

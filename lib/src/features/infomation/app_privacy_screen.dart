@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ongi_app/src/core/constants/app_privacy_source.dart';
-import 'package:ongi_app/src/core/extensions/app_loacalizations_context.dart';
-import 'package:ongi_app/src/shared/widgets/web_back_button.dart';
+import 'package:ongi/src/core/constants/app_privacy_source.dart';
+import 'package:ongi/src/core/extensions/app_loacalizations_context.dart';
+import 'package:ongi/src/shared/widgets/web_back_button.dart';
 
 class AppPrivacyScreen extends StatelessWidget {
   const AppPrivacyScreen({super.key, required this.languageCode});

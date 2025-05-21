@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ongi_app/src/app.dart';
-import 'package:ongi_app/src/routing/app_startup.dart';
+import 'package:ongi/src/app.dart';
+import 'package:ongi/src/routing/app_startup.dart';
 
 class AppStartupWidget extends ConsumerWidget {
   const AppStartupWidget({super.key});

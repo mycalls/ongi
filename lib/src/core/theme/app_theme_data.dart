@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ongi/src/core/constants/app_constants.dart';
 
 class AppThemeData {
-  static const Color appMainColor = Color(0xFFF37D76);
-
   static ThemeData themeData({Brightness? brightness}) {
     return ThemeData(
       useMaterial3: true,

@@ -18,6 +18,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get systemLanguage => 'Configuración del sistema';
 
   @override
+  String get phraseChangeInterval => 'Intervalo';
+
+  @override
+  String get defaultValue => 'Predeterminado';
+
+  @override
+  String get seconds => 's';
+
+  @override
   String get privacyPolicy => 'Política de privacidad';
 
   @override
