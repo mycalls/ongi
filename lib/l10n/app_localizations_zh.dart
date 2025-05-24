@@ -27,6 +27,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get seconds => '秒';
 
   @override
+  String get selectColor => '选择颜色';
+
+  @override
   String get privacyPolicy => '隐私政策';
 
   @override

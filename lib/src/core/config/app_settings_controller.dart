@@ -20,13 +20,17 @@ class AppSettingsController extends _$AppSettingsController {
     );
     final appLocaleString = sharedPreferences.getString(prefAppLocale);
     final appLocale = appLocaleString == null ? null : Locale(appLocaleString);
+    final appGradientColorsIndex = sharedPreferences.getInt(
+      prefAppGradientColorsIndex,
+    );
     dev.log(
-      'AppSettings build: appPhraseTimerInterval($appPhraseTimerIntervalInt), appLocale($appLocale)',
+      'AppSettings build: appPhraseTimerInterval($appPhraseTimerIntervalInt), appLocale($appLocale), appGradientColorsIndex($appGradientColorsIndex)',
     );
 
     return AppSettings(
       appPhraseTimerInterval: appPhraseTimerIntervalInt,
       appLocale: appLocale,
+      appGradientColorsIndex: appGradientColorsIndex,
     );
   }
 
@@ -37,11 +41,12 @@ class AppSettingsController extends _$AppSettingsController {
       prefAppPhraseTimerInterval,
     );
     dev.log(
-      'setAppPhraseTimerInterval: appPhraseTimerInterval($appPhraseTimerIntervalInt), appLocale(${state.appLocale})',
+      'setAppPhraseTimerInterval: appPhraseTimerInterval($appPhraseTimerIntervalInt), appLocale(${state.appLocale}), appGradientColorsIndex(${state.appGradientColorsIndex})',
     );
     state = AppSettings(
       appPhraseTimerInterval: appPhraseTimerIntervalInt,
       appLocale: state.appLocale,
+      appGradientColorsIndex: state.appGradientColorsIndex,
     );
   }
 
@@ -49,11 +54,12 @@ class AppSettingsController extends _$AppSettingsController {
     final sharedPreferences = ref.read(prefsWithCacheProvider).requireValue;
     await sharedPreferences.remove(prefAppPhraseTimerInterval);
     dev.log(
-      'removeAppLocale: appPhraseTimerInterval(null), appLocale(${state.appLocale})',
+      'removeAppLocale: appPhraseTimerInterval(null), appLocale(${state.appLocale}), appGradientColorsIndex(${state.appGradientColorsIndex})',
     );
     state = AppSettings(
       appPhraseTimerInterval: null,
       appLocale: state.appLocale,
+      appGradientColorsIndex: state.appGradientColorsIndex,
     );
   }
 
@@ -63,11 +69,12 @@ class AppSettingsController extends _$AppSettingsController {
     final appLocaleString = sharedPreferences.getString(prefAppLocale);
     final appLocale = appLocaleString == null ? null : Locale(appLocaleString);
     dev.log(
-      'setAppLocale: appPhraseTimerInterval(${state.appPhraseTimerInterval}), appLocale($appLocale)',
+      'setAppLocale: appPhraseTimerInterval(${state.appPhraseTimerInterval}), appLocale($appLocale), appGradientColorsIndex(${state.appGradientColorsIndex})',
     );
     state = AppSettings(
       appPhraseTimerInterval: state.appPhraseTimerInterval,
       appLocale: appLocale,
+      appGradientColorsIndex: state.appGradientColorsIndex,
     );
   }
 
@@ -75,11 +82,41 @@ class AppSettingsController extends _$AppSettingsController {
     final sharedPreferences = ref.read(prefsWithCacheProvider).requireValue;
     await sharedPreferences.remove(prefAppLocale);
     dev.log(
-      'removeAppLocale: appPhraseTimerInterval(${state.appPhraseTimerInterval}), appLocale(null)',
+      'removeAppLocale: appPhraseTimerInterval(${state.appPhraseTimerInterval}), appLocale(null), appGradientColorsIndex(${state.appGradientColorsIndex})',
     );
     state = AppSettings(
       appPhraseTimerInterval: state.appPhraseTimerInterval,
       appLocale: null,
+      appGradientColorsIndex: state.appGradientColorsIndex,
+    );
+  }
+
+  Future<void> setAppGradientColorsIndex(int index) async {
+    final sharedPreferences = ref.read(prefsWithCacheProvider).requireValue;
+    await sharedPreferences.setInt(prefAppGradientColorsIndex, index);
+    final appGradientColorsIndexInt = sharedPreferences.getInt(
+      prefAppGradientColorsIndex,
+    );
+    dev.log(
+      'setAppPhraseTimerInterval: appPhraseTimerInterval(${state.appPhraseTimerInterval}), appLocale(${state.appLocale}), appGradientColorsIndex($appGradientColorsIndexInt)',
+    );
+    state = AppSettings(
+      appPhraseTimerInterval: state.appPhraseTimerInterval,
+      appLocale: state.appLocale,
+      appGradientColorsIndex: appGradientColorsIndexInt,
+    );
+  }
+
+  Future<void> removeAppGradientColorsIndex() async {
+    final sharedPreferences = ref.read(prefsWithCacheProvider).requireValue;
+    await sharedPreferences.remove(prefAppGradientColorsIndex);
+    dev.log(
+      'removeAppLocale: appPhraseTimerInterval(${state.appPhraseTimerInterval}), appLocale(${state.appLocale}), appGradientColorsIndex(null)',
+    );
+    state = AppSettings(
+      appPhraseTimerInterval: state.appPhraseTimerInterval,
+      appLocale: state.appLocale,
+      appGradientColorsIndex: null,
     );
   }
 }

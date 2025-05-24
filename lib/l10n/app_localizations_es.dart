@@ -27,6 +27,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get seconds => 's';
 
   @override
+  String get selectColor => 'Seleccionar color';
+
+  @override
   String get privacyPolicy => 'Política de privacidad';
 
   @override

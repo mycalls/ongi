@@ -8,6 +8,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:ongi/src/core/constants/app_colors.dart';
+import 'package:ongi/src/core/constants/app_constants.dart';
 import 'package:ongi/src/core/constants/emotion_category.dart';
 import 'package:ongi/src/features/home/presentation/animated_color_box.dart';
 import 'package:ongi/src/features/home/services/english_phrase_service.dart';
@@ -26,6 +28,7 @@ class PhraseBody extends StatefulWidget {
     required this.phraseTimerInterval,
     required this.languageCode,
     this.selectedCategory = EmotionCategory.general,
+    this.selectedGradientColorsIndex,
   });
 
   final int phraseTimerInterval;
@@ -38,6 +41,8 @@ class PhraseBody extends StatefulWidget {
   // The emotion category for the phrases to be displayed. Defaults to 'general'.
   final EmotionCategory selectedCategory;
 
+  final int? selectedGradientColorsIndex;
+
   @override
   State<PhraseBody> createState() => _PhraseBodyState();
 }
@@ -48,6 +53,10 @@ class _PhraseBodyState extends State<PhraseBody>
   // The phrase currently displayed on the screen.
   String _currentPhrase = "";
 
+  int _currentPaletteIndex = 0;
+
+  int? _fixedGradientColorsIndex;
+
   // 다음 문구로 업데이트하기 위한 타이머입니다.
   // Timer for updating to the next phrase.
   Timer? _phraseTimer;
@@ -55,9 +64,9 @@ class _PhraseBodyState extends State<PhraseBody>
   // Timer to control how long the screen stays awake (default 30 minutes).
   Timer? _wakelockTimer;
 
-  // 문구 목록에서 무작위로 문구를 선택하기 위한 인스턴스입니다.
-  // Instance for randomly selecting a phrase from the list.
-  final Random _random = Random();
+  final Random _randomForPhrase = Random();
+
+  final Random _randomForColor = Random();
 
   // 문구의 페이드 인/아웃 애니메이션을 제어합니다.
   // Controls the fade-in/out animation of the phrase.
@@ -70,19 +79,25 @@ class _PhraseBodyState extends State<PhraseBody>
   // The next phrase to be displayed. Prepared before the animation transition.
   String _nextPhrase = "";
 
+  int _nextPaletteIndex = 0;
+
   // 애니메이션 및 타이머 관련 상수 값들입니다.
   // Constant values related to animations and timers.
   // 문구 페이드 인/아웃 애니메이션 지속 시간입니다.
   // Duration of the phrase fade-in/out animation.
-  static const Duration _animationDuration = Duration(milliseconds: 1500);
-  // 문구 변경 간격입니다. (사라짐(1.5s) + 나타남(1.5s) + 대기(12s))
-  // Interval for changing phrases. (Fade out (1.5s) + Fade in (1.5s) + Wait (12s))
-  // static const Duration _phraseTimerInterval = Duration(seconds: 15);
+  static const Duration _animationDuration = Duration(
+    milliseconds: defaultFadeDuration,
+  );
+  // 문구 변경 간격입니다. (사라짐(1s) + 나타남(1s) + 대기(10s))
+  // Interval for changing phrases. (Fade out (1s) + Fade in (1s) + Wait (10s))
+  // static const Duration _phraseTimerInterval = Duration(seconds: 12);
   // Wakelock 관련 상수입니다.
   // Constants related to wakelock.
   // 화면 켜짐 유지 시간입니다.
   // Duration to keep the screen awake.
-  static const Duration _wakelockDuration = Duration(minutes: 30);
+  static const Duration _wakelockDuration = Duration(
+    minutes: defaultWakeLockDuration,
+  );
 
   @override
   void initState() {
@@ -105,9 +120,13 @@ class _PhraseBodyState extends State<PhraseBody>
     );
 
     _prepareNextContent(widget.selectedCategory);
+    _changeColors();
     // 초기 문구를 설정합니다.
     // Set the initial phrase.
     _currentPhrase = _nextPhrase;
+    _currentPaletteIndex = _nextPaletteIndex;
+
+    _fixedGradientColorsIndex = widget.selectedGradientColorsIndex;
 
     // 첫 프레임이 렌더링된 후 애니메이션 컨트롤러 값을 설정하여 문구가 즉시 보이도록 합니다.
     // After the first frame is rendered, set the animation controller's value so the phrase is immediately visible.
@@ -189,7 +208,13 @@ class _PhraseBodyState extends State<PhraseBody>
       _updateContent(category: widget.selectedCategory);
     }
     if (oldWidget.phraseTimerInterval != widget.phraseTimerInterval) {
+      // Interval 변경 시 타이머 재시작
+      // restart timer when interval changes
       _startPhraseTimer();
+    }
+    if (oldWidget.selectedGradientColorsIndex !=
+        widget.selectedGradientColorsIndex) {
+      _changeFixedColors(widget.selectedGradientColorsIndex);
     }
   }
 
@@ -229,7 +254,9 @@ class _PhraseBodyState extends State<PhraseBody>
       } else {
         do {
           _nextPhrase =
-              phrasesForCategory[_random.nextInt(phrasesForCategory.length)];
+              phrasesForCategory[_randomForPhrase.nextInt(
+                phrasesForCategory.length,
+              )];
         } while (_nextPhrase == _currentPhrase &&
             phrasesForCategory.length >
                 1); // 문구가 여러 개 있을 때만 중복 방지 Prevent duplicates only if there are multiple phrases
@@ -255,7 +282,7 @@ class _PhraseBodyState extends State<PhraseBody>
 
     final categoryToUse = category ?? widget.selectedCategory;
     _prepareNextContent(categoryToUse);
-
+    _changeColors();
     // 현재 문구를 사라지게 합니다.
     // Fade out the current content.
     await _animationController!.reverse();
@@ -265,6 +292,7 @@ class _PhraseBodyState extends State<PhraseBody>
         // 문구 내용을 교체합니다.
         // Replace the content with the new phrase.
         _currentPhrase = _nextPhrase;
+        _currentPaletteIndex = _nextPaletteIndex;
       });
     }
 
@@ -318,6 +346,55 @@ class _PhraseBodyState extends State<PhraseBody>
     dev.log('Wakelock timer started for $_wakelockDuration');
   }
 
+  // 화면 탭 시 호출될 함수
+  Future<void> _handleTapToChangePhrase() async {
+    dev.log('Tap detected by PhraseBody, attempting to change phrase.');
+    // 이미 애니메이션 중이면 무시
+    if (_animationController != null && _animationController!.isAnimating) {
+      dev.log('Phrase change on tap skipped: animation already in progress.');
+      return;
+    }
+    await _updateContent(); // 문구 업데이트
+    _startPhraseTimer(); // 문구 변경 타이머 재시작 (탭 이후 간격 유지)
+  }
+
+  void _changeColors() {
+    if (_fixedGradientColorsIndex != null) {
+      dev.log('_fixedGradientColorsIndex: $_fixedGradientColorsIndex');
+      return;
+    }
+    if (BoxGradientColors.gradientPalettes.isEmpty) {
+      // 팔레트가 비어있으면 기본값 또는 에러 처리
+      dev.log(
+        'Error: gradientPalettes is empty. Cannot change colors.',
+        error: 'No palettes',
+      );
+      _nextPaletteIndex = -1; // 또는 -1 등으로 설정 후 다른 곳에서 처리
+      return;
+    }
+    if (BoxGradientColors.gradientPalettes.length == 1) {
+      _nextPaletteIndex = 0;
+      return;
+    }
+    do {
+      _nextPaletteIndex = _randomForColor.nextInt(
+        BoxGradientColors.gradientPalettes.length,
+      );
+    } while (_nextPaletteIndex == _currentPaletteIndex);
+  }
+
+  void _changeFixedColors(int? index) {
+    if (index != null) {
+      if (index >= BoxGradientColors.gradientPalettes.length) return;
+      if (index == _fixedGradientColorsIndex) return;
+    }
+    if (mounted) {
+      setState(() {
+        _fixedGradientColorsIndex = index;
+      });
+    }
+  }
+
   @override
   void dispose() {
     // 앱 생명주기 옵저버를 해제합니다.
@@ -367,15 +444,43 @@ class _PhraseBodyState extends State<PhraseBody>
 
     return AnimatedBuilder(
       animation: _animationController!,
-      builder: (context, child) {
+      builder: (context, _) {
         final double contentOpacity = _fadeAnimation!.value;
+        final phraseTextChild = Center(
+          child: PhraseText(currentPhrase: _currentPhrase),
+        );
 
-        return AnimatedColorBox(
-          child: Center(
-            child: Opacity(
-              opacity: contentOpacity,
-              child: PhraseText(currentPhrase: _currentPhrase),
+        return InkWell(
+          onTap: _handleTapToChangePhrase,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [appMainColor, appSecondColor],
+              ),
             ),
+            child:
+                _fixedGradientColorsIndex != null &&
+                        _fixedGradientColorsIndex! <
+                            BoxGradientColors.gradientPalettes.length
+                    ? AnimatedColorBox(
+                      colorIndex: _fixedGradientColorsIndex!,
+                      child: Opacity(
+                        opacity: contentOpacity,
+                        child: phraseTextChild,
+                      ),
+                    )
+                    : Opacity(
+                      opacity: contentOpacity,
+                      child:
+                          _currentPaletteIndex == -1
+                              ? phraseTextChild
+                              : AnimatedColorBox(
+                                colorIndex: _currentPaletteIndex,
+                                child: phraseTextChild,
+                              ),
+                    ),
           ),
         );
       },
@@ -396,29 +501,10 @@ class PhraseText extends StatelessWidget {
     // 이를 기반으로 스타일을 커스터마이징합니다. 이렇게 하면 사용자의 시스템 글꼴 크기 설정을 존중할 수 있습니다.
     // Uses Theme.of(context).textTheme to get the current theme's text style
     // and customizes it. This approach respects the user's system font size settings.
-    final TextStyle? phraseTextStyle = Theme.of(
-      context,
-    ).textTheme.headlineMedium?.copyWith(
-      fontWeight: FontWeight.bold,
-      color: const Color.fromRGBO(
-        255,
-        255,
-        255,
-        0.95,
-      ), // `Colors.white.withOpacity(0.95)`와 동일합니다. Equivalent to `Colors.white.withOpacity(0.95)`.
-      shadows: [
-        const Shadow(
-          blurRadius: 12.0,
-          color: Color.fromRGBO(
-            0,
-            0,
-            0,
-            0.7,
-          ), // `Colors.black.withOpacity(0.7)`와 동일합니다. Equivalent to `Colors.black.withOpacity(0.7)`.
-          offset: Offset(2.5, 2.5),
-        ),
-      ],
-    );
+    final TextStyle? phraseTextStyle = Theme.of(context)
+        .textTheme
+        .headlineMedium
+        ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white);
 
     // 아래와 같이 TextStyle을 상수로 정의하면 앱 전체에서 일관된 스타일을 적용할 수 있지만,
     // 사용자의 시스템 글꼴 크기 설정을 반영하지 못하는 단점이 있습니다.

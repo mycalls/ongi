@@ -27,6 +27,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get seconds => '초';
 
   @override
+  String get selectColor => '색깔 선택';
+
+  @override
   String get privacyPolicy => '개인정보 보호정책';
 
   @override

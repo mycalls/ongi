@@ -39,7 +39,7 @@ This Privacy Policy may be updated if the service structure or legal requirement
 
 7. Contact
 If you have any questions regarding this Privacy Policy, please contact us at:
-jongsukoh80@gmail.com
+ohjongsuk80@gmail.com
 
 Ongi does not collect, track, or request any personally identifiable information from users.
 This Privacy Policy applies to Android, iOS, and Web versions of the service.
@@ -81,7 +81,7 @@ This Privacy Policy applies to Android, iOS, and Web versions of the service.
 
 7. 문의처
 본 개인정보처리방침에 대한 문의사항은 다음 이메일을 통해 접수해주시기 바랍니다:
-jongsukoh80@gmail.com
+ohjongsuk80@gmail.com
 
 온기 서비스는 개인정보를 수집하지 않으며, 사용자로부터 어떠한 식별 정보도 요구하지 않습니다.
 이 방침은 Android, iOS, 웹 환경 모두에 적용됩니다.
@@ -123,7 +123,7 @@ Esta política puede actualizarse si cambian las leyes o la estructura del servi
 
 7. Contacto
 Si tiene alguna pregunta sobre esta política de privacidad, puede escribirnos a:
-jongsukoh80@gmail.com
+ohjongsuk80@gmail.com
 
 Ongi no recopila, rastrea ni solicita ningún tipo de información personal del usuario.
 ''';
@@ -164,7 +164,7 @@ Ongiは14歳未満を含むすべての年齢のユーザーが利用できま�
 
 7. お問い合わせ
 本ポリシーに関するお問い合わせは、以下のメールアドレスまでご連絡ください:
-jongsukoh80@gmail.com
+ohjongsuk80@gmail.com
 
 Ongiは、ユーザーからいかなる個人情報も取得せず、追跡または識別を行いません。
 ''';
@@ -205,7 +205,7 @@ Ongi对所有年龄段用户开放,包括14岁以下用户。由于我们不收�
 
 7. 联系方式
 如有关于本隐私政策的问题，请通过以下邮箱联系我们：
-jongsukoh80@gmail.com
+ohjongsuk80@gmail.com
 
 Ongi不会收集、跟踪或请求用户的任何身份信息。
 ''';

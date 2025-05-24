@@ -8,6 +8,7 @@ import 'package:ongi/src/core/constants/emotion_category.dart';
 import 'package:ongi/src/core/extensions/app_loacalizations_context.dart';
 import 'package:ongi/src/features/home/presentation/app_locale_button.dart';
 import 'package:ongi/src/features/home/presentation/app_phrase_timer_interval_button.dart';
+import 'package:ongi/src/features/home/presentation/box_color_picker_button.dart';
 import 'package:ongi/src/features/home/providers/main_category_provider.dart';
 import 'package:ongi/src/routing/app_router.dart';
 
@@ -90,6 +91,7 @@ class AppDrawer extends ConsumerWidget {
             Dividers.divider16,
             const AppLocaleButton(),
             const AppPhraseTimerIntervalButton(),
+            const BoxColorPickerButton(),
             Dividers.divider16,
             // terms button
             ListTile(

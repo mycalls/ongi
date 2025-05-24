@@ -34,6 +34,7 @@ class MainScreen extends ConsumerWidget {
                 appSettings.appLocale?.languageCode ??
                 PlatformDispatcher.instance.locale.languageCode,
             // 선택된 카테고리 전달
+            selectedGradientColorsIndex: appSettings.appGradientColorsIndex,
           );
         },
       ),

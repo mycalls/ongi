@@ -27,6 +27,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get seconds => '秒';
 
   @override
+  String get selectColor => '色を選択';
+
+  @override
   String get privacyPolicy => 'プライバシーポリシー';
 
   @override

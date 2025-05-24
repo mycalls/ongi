@@ -5,6 +5,7 @@
     "phraseChangeInterval": "Interval",
     "defaultValue": "Default",
     "seconds": "s",
+    "selectColor": "Select color",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "appInfo": "App information",

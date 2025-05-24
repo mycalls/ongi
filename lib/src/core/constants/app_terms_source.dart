@@ -38,7 +38,7 @@ Last Updated: May 19, 2025
 
 8. Contact
 · If you have any questions regarding these Terms, please contact us at:
-· jongsukoh80@gmail.com
+· ohjongsuk80@gmail.com
 
 By using this Service, you acknowledge and agree to these Terms.
 ''';
@@ -77,7 +77,7 @@ By using this Service, you acknowledge and agree to these Terms.
 
 8. 문의
 · 서비스 이용 관련 문의사항은 다음 이메일을 통해 연락해주시기 바랍니다:
-· jongsukoh80@gmail.com
+· ohjongsuk80@gmail.com
 
 본 서비스를 이용함으로써, 귀하는 위 약관에 동의하게 됩니다.
 ''';
@@ -117,7 +117,7 @@ By using this Service, you acknowledge and agree to these Terms.
 
 8. Contacto
 · Para preguntas o comentarios, puede escribirnos a:
-· jongsukoh80@gmail.com
+· ohjongsuk80@gmail.com
 ''';
 
   static const ja = '''
@@ -155,7 +155,7 @@ By using this Service, you acknowledge and agree to these Terms.
 
 8. お問い合わせ
 · ご不明点がある場合は、以下のメールアドレスまでお問い合わせください：
-· jongsukoh80@gmail.com
+· ohjongsuk80@gmail.com
 ''';
 
   static const zh = '''
@@ -193,6 +193,6 @@ By using this Service, you acknowledge and agree to these Terms.
 
 8. 联系方式
 · 如有任何疑问，请通过以下邮箱联系我们：
-· jongsukoh80@gmail.com
+· ohjongsuk80@gmail.com
 ''';
 }

@@ -140,6 +140,12 @@ abstract class AppLocalizations {
   /// **'s'**
   String get seconds;
 
+  /// No description provided for @selectColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Select color'**
+  String get selectColor;
+
   /// No description provided for @privacyPolicy.
   ///
   /// In en, this message translates to:
