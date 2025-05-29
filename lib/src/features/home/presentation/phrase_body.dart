@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:ongi/src/core/constants/app_colors.dart';
 import 'package:ongi/src/core/constants/app_constants.dart';
 import 'package:ongi/src/core/constants/emotion_category.dart';
+import 'package:ongi/src/core/extensions/app_loacalizations_context.dart';
 import 'package:ongi/src/features/home/presentation/animated_color_box.dart';
 import 'package:ongi/src/features/home/services/english_phrase_service.dart';
 import 'package:ongi/src/features/home/services/japanese_phrase_service.dart';
@@ -264,8 +265,7 @@ class _PhraseBodyState extends State<PhraseBody>
     } else {
       // 선택된 카테고리에 대한 문구가 없는 경우를 대비한 기본 문구입니다. (이론상 발생하기 어려움)
       // Fallback phrase in case there are no phrases for the selected category (theoretically unlikely).
-      _nextPhrase =
-          "Don't worry, everything will be alright."; // 기본 문구 Default phrase
+      _nextPhrase = context.loc.defaultPhrase; // 기본 문구 Default phrase
     }
   }
 

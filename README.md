@@ -6,7 +6,7 @@ English | [한글](README.ko.md)
 
 ## Features
 - Displays encouraging phrases to help you feel grounded
-- Categories for different emotional states (calm, angry, sad, afraid)
+- Categories for different emotional states (Optional)
 - Customizable display interval
 - Clean, distraction-free interface
 - No ads, no sign-up

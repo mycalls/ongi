@@ -39,6 +39,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get appInfo => '应用信息';
 
   @override
+  String get defaultPhrase => '没关系，没关系。';
+
+  @override
   String get whenGeneral => '需要平静时';
 
   @override

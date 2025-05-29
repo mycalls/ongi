@@ -39,6 +39,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get appInfo => 'Información de la aplicación';
 
   @override
+  String get defaultPhrase => 'Está bien. Está bien.';
+
+  @override
   String get whenGeneral => 'Cuando necesites calma';
 
   @override

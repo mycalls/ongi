@@ -39,6 +39,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get appInfo => 'アプリ情報';
 
   @override
+  String get defaultPhrase => '大丈夫。大丈夫だよ。';
+
+  @override
   String get whenGeneral => '落ち着きが必要なとき';
 
   @override

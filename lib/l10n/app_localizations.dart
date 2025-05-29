@@ -164,6 +164,12 @@ abstract class AppLocalizations {
   /// **'App information'**
   String get appInfo;
 
+  /// No description provided for @defaultPhrase.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s okay. It\'s okay.'**
+  String get defaultPhrase;
+
   /// No description provided for @whenGeneral.
   ///
   /// In en, this message translates to:

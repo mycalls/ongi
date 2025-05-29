@@ -39,6 +39,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get appInfo => '앱 정보';
 
   @override
+  String get defaultPhrase => '괜찮아. 괜찮아.';
+
+  @override
   String get whenGeneral => '평온한 마음이 필요할 때';
 
   @override
